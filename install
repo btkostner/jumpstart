@@ -1,0 +1,121 @@
+#!/bin/bash
+
+##############################
+# packages
+##############################
+
+####################
+# functions
+####################
+
+function install {
+  if pacman -Qs $1 > /dev/null ; then
+    echo "$1 already installed. skipping"
+  else
+    echo "installing $1"
+    sudo pacman -Sq --noconfirm $1
+  fi
+}
+
+####################
+# script start
+####################
+
+mkdir tmp
+cd tmp
+
+####################
+# package setup
+####################
+
+install wget
+
+if pacman -Qs yaourt > /dev/null ; then
+  echo "yaourt already installed. skipping"
+else
+  echo "installing yaourt"
+
+  wget https://aur.archlinux.org/packages/pa/package-query/package-query.tar.gz
+  tar xfz package-query.tar.gz
+  cd package-query
+  makepkg
+  sudo pacman -U --noconfirm package-query*.pkg.tar.xz
+  cd ../
+
+  wget https://aur.archlinux.org/packages/ya/yaourt/yaourt.tar.gz
+  tar xfz yaourt.tar.gz
+  cd yaourt
+  makepkg
+  sudo pacman -U --noconfirm yaourt*.pkg.tar.xz
+  cd ../
+fi
+
+if [ ! -f ../build.js ] ; then
+  install git
+
+  echo "build file not found. cloning repo"
+  git clone https://github.com/btkostner/jumpstart.git ../
+else
+  echo "build file found."
+fi
+
+####################
+# zsh setup
+####################
+
+install zsh
+install zsh-completions
+
+if echo $SHELL | grep -q "/usr/bin/zsh" ; then
+  echo "shell already set to zsh"
+else
+  echo "setting shell to zsh0"
+  chsh -s /usr/bin/zsh
+fi
+
+if [ ! -d ~/.oh-my-zsh ] ; then
+  echo "installing oh-my-zsh"
+  wget https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh
+
+  sh ./install.sh
+fi
+
+####################
+# font setup
+####################
+
+install freetype2-infinality
+
+####################
+# wm setup
+####################
+
+install feh
+install compton
+install herbstluftwm
+
+####################
+# script end
+####################
+
+cd ../
+rm -rf tmp
+
+####################
+# move build dir
+####################
+
+if [ ! -d ./build ] ; then
+  install npm
+  install node
+
+  echo "build files not found. running build script"
+  npm install
+  node build.js
+else
+  echo "build files found."
+fi
+
+echo "moving build directory to home"
+cp -Rf ./build/. ~/
+echo "install complete"

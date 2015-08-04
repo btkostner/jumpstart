@@ -32,21 +32,6 @@ var lsdir = function(dir) {
   return _.flatten(paths);
 };
 
-var rmdir = function(dir) {
-  var list = fs.readdirSync(dir);
-  for(var i = 0; i < list.length; i++) {
-    var filename = path.join(dir, list[i]);
-    var stat = fs.statSync(filename);
-
-    if (stat.isDirectory()) {
-      rmdir(filename);
-    } else {
-      fs.unlinkSync(filename);
-    }
-  }
-  fs.rmdirSync(dir);
-};
-
 var flattenObject = function(ob) {
     var toReturn = {};
 
@@ -58,7 +43,7 @@ var flattenObject = function(ob) {
             for (var x in flatObject) {
                 if (!flatObject.hasOwnProperty(x)) continue;
 
-                toReturn[i + '.' + x] = flatObject[x];
+                toReturn[i + '.' + String(x)] = flatObject[x];
             }
         } else {
             toReturn[i] = ob[i];
@@ -84,9 +69,9 @@ _.each(paths, function(i) {
 
 fs.rmrf("build", function(err) {
   if (err) {
-    console.log("could not remove build directory");
+    throw "please remove build directory"
   } else {
-    console.log("removed build directory");
+    console.log("reset build directory");
   }
 });
 
@@ -95,9 +80,7 @@ _.each(paths, function(i) {
 
   fs.mkdirp(d, function(err) {
     if (err) {
-      console.log("error creating " + d);
-    } else {
-      console.log(d + " created");
+      console.log("error creating folder " + d);
     }
   });
 });
@@ -110,22 +93,31 @@ _.each(paths, function(e, i, l) {
   var e = path.normalize(e);
   var d = path.normalize(e.split("scaffolding").join("build"));
 
-  fs.readFile(e, 'utf8', function(err, data) {
-    if (err) {
-      console.log("error reading " + e);
-    } else {
-      console.log("reading " + e);
-      var data = data;
-      _.each(themevars, function(v, n) {
-        data = data.split("$" + n).join(v);
-      });
-      fs.writeFile(d, data, function(err) {
-        if (err) {
-          console.log("error saving " + d + " file");
-        } else {
-          console.log("saved " + d);
-        }
-      });
-    }
-  });
+  if (path.extname(e) != ".jpg") {
+    fs.readFile(e, 'utf8', function(err, data) {
+      if (err) {
+        console.log("error reading " + e);
+      } else {
+        var data = data;
+        _.each(themevars, function(v, n) {
+          data = data.split("$" + n).join(v);
+        });
+        fs.writeFile(d, data, function(err) {
+          if (err) {
+            console.log("error saving " + d + " file");
+          } else {
+            console.log("saved " + d);
+          }
+        });
+      }
+    });
+  } else {
+    fs.copy(e, d, function(err) {
+      if (err) {
+        console.log("error saving " + d + " file");
+      } else {
+        console.log("saving photo " + d);
+      }
+    });
+  }
 });
