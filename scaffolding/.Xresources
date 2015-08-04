@@ -1,6 +1,6 @@
-*.foreground:   $element.forground
+*.foreground:   $element.foreground
 *.background:   $element.background
-*.cursorColor:  $element.forground
+*.cursorColor:  $element.foreground
 
 ! black
 *.color0:       $color.0

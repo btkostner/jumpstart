@@ -25,7 +25,7 @@ hc unlock
 hc set frame_bg_normal_color $element.background
 hc set frame_bg_active_color $element.background
 hc set window_border_normal_color $element.background
-hc set window_border_active_color $element.forground
+hc set window_border_active_color $element.foreground
 
 # spacing
 hc set frame_border_width $layout.gaps

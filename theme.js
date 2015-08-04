@@ -31,7 +31,7 @@ var color = {
 
 var element = {
   "background": color[0],
-  "forground":  color[7]
+  "foreground":  color[7]
 };
 
 ////////////////////
