@@ -54,7 +54,9 @@ if [ ! -f ../build.js ] ; then
   install git
 
   echo "build file not found. cloning repo"
-  git clone https://github.com/btkostner/jumpstart.git ../
+  git clone https://github.com/btkostner/jumpstart.git git
+  mv ./git/* ../
+  rm -rf ./git
 else
   echo "build file found."
 fi

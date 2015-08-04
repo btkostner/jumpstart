@@ -19,7 +19,25 @@ jumpstart is a collection of scripts designed to
 
 #### Easy way
 
-TODO: finish install script and share it with the world
+1. Make a tmp folder
+
+  `mkdir tmp && cd tmp`
+
+2. wget master script
+
+  `wget https://raw.githubusercontent.com/btkostner/jumpstart/master/install`
+
+3. Make script executable
+
+  `chmod +x ./install`
+
+4. Run script
+
+  `./install`
+
+5. (optional) Remove tmp folder
+
+  `cd .. && rm -rf ./tmp`
 
 #### Git way
 
