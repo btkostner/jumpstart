@@ -45,6 +45,16 @@ jumpstart is a collection of scripts designed to
 
   `git clone https://github.com/btkostner/jumpstart.git <folder>`
 
+2. Run script
+
+  `./install`
+
+#### Build configuration files only
+
+1. Clone this repo to `<folder>`
+
+  `git clone https://github.com/btkostner/jumpstart.git <folder>`
+
 2. Install dependencies (requires npm)
 
   `npm install`
@@ -55,7 +65,7 @@ jumpstart is a collection of scripts designed to
 
 ## <a name="works"></a> How it works
 
-All configuration files are kept in the scaffolding directory.
+All configuration files are kept in the scaffolding directory. Simple replace any variables you want to be changed on build with `$color.01` or equivalent. All variables are kept in the theme.js file for easy editing and sharing.
 
 ## <a name="roadmap"></a> Roadmap
 
@@ -72,13 +82,13 @@ It seemed simple enough to work with.
 
 ### This does the same thing as X
 
-Cool.
+Cool story. Now you have options.
 
 ### Can I help with adding this awesome feature I want.
 
 Are you really asking permission for this?
 
-### Can I use this for my awesome dotfiles?
+### Can I use this for my awesome setup / dotfiles?
 
 Dude. Yes.
 
