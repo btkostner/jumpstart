@@ -3,7 +3,6 @@
 
 jumpstart is a collection of scripts designed to
 
-
 1. Install necessary packages
 2. Build all configuration based on ONE theme file
 3. Move all configuration files into the correct paths
@@ -16,6 +15,8 @@ jumpstart is a collection of scripts designed to
 * [License](#license)
 
 ## <a name="installation"></a> Installation
+
+!!! Warning !!! Scaffolding files and packages are system specific. Do not run the install script unless you are confident all files and packages are accurate to your system.
 
 #### Easy way
 
@@ -88,7 +89,7 @@ Cool story. Now you have options.
 
 Are you really asking permission for this?
 
-### Can I use this for my awesome setup / dotfiles?
+### Can I use these scripts for my awesome setup / dotfiles?
 
 Dude. Yes.
 

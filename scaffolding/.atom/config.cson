@@ -1,0 +1,32 @@
+"*":
+  welcome:
+    showOnStartup: false
+  core:
+    autoHideMenuBar: true
+    themes: [
+      "isotope-ui"
+      "base16-tomorrow-dark-theme"
+    ]
+  editor:
+    invisibles: {}
+    showInvisibles: true
+    softWrap: true
+    scrollPastEnd: true
+    zoomFontWhenCtrlScrolling: false
+    autoIndentOnPaste: false
+  "one-dark-ui": {}
+  "isotope-ui":
+    customBackgroundColorPicker:
+      red: 29
+      green: 31
+      blue: 33
+      alpha: 1
+    fontFamily: "System Default"
+    customBackgroundColor: true
+    lowContrastTooltip: true
+    matchEditorFont: true
+    minimalMode: true
+    fontWeight: "Regular"
+  "css-comb":
+    config: "common"
+  "todo-show": {}
