@@ -1,28 +1,17 @@
 #!/bin/bash
 
-##############################
-# packages
-##############################
-
 ####################
 # functions
 ####################
 
 function install {
-  if pacman -Qs $1 > /dev/null ; then
+  if yaourt -Qs $1 > /dev/null ; then
     echo "$1 already installed. skipping"
   else
     echo "installing $1"
-    sudo pacman -Sq --noconfirm $1
+    yaourt -S --noconfirm $1
   fi
 }
-
-####################
-# script start
-####################
-
-mkdir tmp
-cd tmp
 
 ####################
 # package setup
@@ -33,7 +22,10 @@ install wget
 if pacman -Qs yaourt > /dev/null ; then
   echo "yaourt already installed. skipping"
 else
-  echo "installing yaourt"
+  echo "=========== YAOURT ==========="
+
+  mkdir tmp
+  cd tmp
 
   wget https://aur.archlinux.org/packages/pa/package-query/package-query.tar.gz
   tar xfz package-query.tar.gz
@@ -48,49 +40,70 @@ else
   makepkg
   sudo pacman -U --noconfirm yaourt*.pkg.tar.xz
   cd ../
+
+  cd ../
+  rm -r tmp
 fi
 
-if [ ! -f ../build.js ] ; then
-  install git
+####################
+# git setup
+####################
 
-  echo "build file not found. cloning repo"
-  git clone https://github.com/btkostner/jumpstart.git git
-  mv ./git/* ../
-  rm -rf ./git
+if pacman -Qs git > /dev/null ; then
+  echo "git already installed. skipping"
 else
-  echo "build file found."
+  echo "============ GIT ============"
+  install git
 fi
 
 ####################
 # zsh setup
 ####################
 
+echo "============ ZSH  ============"
+
 install zsh
 install zsh-completions
 
-if echo $SHELL | grep -q "/usr/bin/zsh" ; then
-  echo "shell already set to zsh"
+if echo $SHELL | grep -q "zsh" ; then
+  echo "zsh already default shell. skipping"
 else
-  echo "setting shell to zsh0"
+  echo "setting zsh to default shell"
   chsh -s /usr/bin/zsh
 fi
 
 if [ ! -d ~/.oh-my-zsh ] ; then
-  echo "installing oh-my-zsh"
-  wget https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh
-
-  sh ./install.sh
+  echo "========== OH-MY-ZSH ========="
+  git clone --depth=1 https://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh
 fi
 
 ####################
 # font setup
 ####################
 
-install freetype2-infinality
+echo "=========== FONTS ============"
+
+install ttf-liberation
+
+####################
+# pulseaudio setup
+####################
+
+echo "========= PULSEAUDIO ========="
+
+install pulseaudio
+install pavucontrol
+install pulseaudio-alsa
+
+if lsmod | grep -q "oss" ; then
+  rmmod snd_pcm_oss # https://wiki.archlinux.org/index.php/PulseAudio
+fi
 
 ####################
 # mopidy setup
 ####################
+
+echo "=========== MOPIDY ==========="
 
 install mopidy
 
@@ -108,52 +121,69 @@ install mopidy-soundcloud
 install mopidy-spotify
 install mopidy-youtube
 
-systemctl --user enable mopidy.service
+####################
+# ncmpcpp setup
+####################
+
+echo "=========== NCMPCPP =========="
+
+install ncmpcpp
 
 ####################
 # cava setup
 ####################
 
+echo "============ CAVA ============"
+
 install cava
-
-####################
-# atom setup
-####################
-
-install atom-editor
-
-apm install isotope-ui one-dark-ui todo-show sort-lines project-manager language-jade editorconfig color-picker stylus
 
 ####################
 # wm setup
 ####################
+
+echo "============= WM ============="
 
 install feh
 install compton
 install herbstluftwm
 
 ####################
-# script end
+# chrome setup
 ####################
 
-cd ../
-rm -rf tmp
+echo "=========== CHROME ==========="
+
+install google-chrome
 
 ####################
-# move build dir
+# atom setup
 ####################
 
-if [ ! -d ./build ] ; then
-  install npm
-  install node
+echo "============ ATOM ============"
 
-  echo "build files not found. running build script"
-  npm install
-  node build.js
-else
-  echo "build files found."
-fi
+install atom-editor
+
+apm install -c isotope-ui todo-show sort-lines project-manager language-jade editorconfig color-picker stylus minimap minimap-git-diff
+
+####################
+# copy dotfiles
+####################
+
+echo "========== DOTFILES =========="
 
 echo "moving build directory to home"
-cp -Rf ./build/. ~/
+cp -Rf ./dotfiles/. ~/
+
+####################
+# post-dotfiles
+####################
+
+echo "======== POST DOTFILES ======="
+
+systemctl --user enable mopidy.service
+
+####################
+# end of script
+####################
+
 echo "install complete"

@@ -22,13 +22,13 @@ hc unlock
 ## herbstluft colors
 ####################
 
-hc set frame_bg_normal_color $element.background
-hc set frame_bg_active_color $element.background
-hc set window_border_normal_color $element.background
-hc set window_border_active_color $element.foreground
+hc set frame_bg_normal_color '#1d1f21'
+hc set frame_bg_active_color '#1d1f21'
+hc set window_border_normal_color '#1d1f21'
+hc set window_border_active_color '#c5c8c6'
 
 # spacing
-hc set frame_border_width $layout.gaps
+hc set frame_border_width 10
 hc set window_border_width 1
 
 hc set snap_distance 10
@@ -54,9 +54,9 @@ hc set mouse_recenter_gap 0
 Mod=Mod4 # super key
 
 # non herbstluft keybindings
-hc keybind XF86AudioRaiseVolume spawn amixer set Master,0 1%+
-hc keybind XF86AudioLowerVolume spawn amixer set Master,0 1%-
-hc keybind XF86AudioMute spawn amixer set Master,0 toggle
+hc keybind XF86AudioRaiseVolume spawn sh -c "pactl set-sink-mute 0 false ; pactl set-sink-volume 0 +1%"
+hc keybind XF86AudioLowerVolume spawn sh -c "pactl set-sink-mute 0 false ; pactl -- set-sink-volume 0 -1%"
+hc keybind XF86AudioMute spawn pactl set-sink-mute 0 toggle
 
 # app launching keybindings
 hc keybind $Mod-Return spawn dmenu_run
