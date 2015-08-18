@@ -138,6 +138,15 @@ echo "============ CAVA ============"
 install cava
 
 ####################
+# twitch setup
+####################
+
+echo "=========== TWITCH ==========="
+
+install livestreamer
+install mpv
+
+####################
 # wm setup
 ####################
 
