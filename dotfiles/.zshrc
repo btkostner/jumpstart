@@ -72,7 +72,7 @@ fi
 # export ARCHFLAGS="-arch x86_64"
 
 # ssh
-export SSH_KEY_PATH="~/.ssh/dsa_id"
+eval $(keychain --eval --agents ssh --quiet --confhost --clear)
 
 # full colors
 source ~/.config/base16/tomorrow.dark.sh
@@ -84,4 +84,6 @@ source ~/.config/base16/tomorrow.dark.sh
 
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
+# alias ohmyzsh="mate ~/.oh-my-zsh
+
+alias ag="ag --stats"

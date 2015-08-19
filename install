@@ -45,16 +45,15 @@ else
   rm -r tmp
 fi
 
+install npm
+
 ####################
 # git setup
 ####################
 
-if pacman -Qs git > /dev/null ; then
-  echo "git already installed. skipping"
-else
-  echo "============ GIT ============"
-  install git
-fi
+echo "============ GIT ============"
+
+install git
 
 ####################
 # zsh setup
@@ -76,6 +75,33 @@ if [ ! -d ~/.oh-my-zsh ] ; then
   echo "========== OH-MY-ZSH ========="
   git clone --depth=1 https://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh
 fi
+
+###################
+# ag setup
+###################
+
+echo "============= AG ============="
+
+install the_silver_searcher # just plop this here
+
+####################
+# vim setup
+####################
+
+echo "============= VIM ============"
+
+install vim
+install tidyhtml
+sudo npm install -g csslint
+sudo npm install -g jsonlint
+
+####################
+# keychain setup
+####################
+
+echo "========== KEYCHAIN =========="
+
+install keychain
 
 ####################
 # font setup
@@ -190,6 +216,8 @@ cp -Rf ./dotfiles/. ~/
 echo "======== POST DOTFILES ======="
 
 systemctl --user enable mopidy.service
+
+vim +PluginInstall +qall
 
 ####################
 # end of script
