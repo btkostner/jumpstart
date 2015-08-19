@@ -1,4 +1,4 @@
-song_columns_list_format = "(30)[green]{a} (65)[white]{t} (5)[blue]{n}"
+song_columns_list_format = "(30)[green]{a} (65)[white]{t} (5)[yellow]{n}"
 song_list_format = "{a}{t}{n}"
 song_status_format = "$3%a$9 | $8%t$9 | $4%b$9"
 
@@ -18,4 +18,4 @@ message_delay_time = "3"
 progressbar_look = "━━─"
 
 main_window_color = "green"
-statusbar_color = "red"
+statusbar_color = "blue"
