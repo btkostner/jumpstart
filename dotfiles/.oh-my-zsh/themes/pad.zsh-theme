@@ -83,11 +83,11 @@ function git_status {
     add_if $INDEX '^?? '             $ZSH_THEME_GIT_PROMPT_UNTRACKED
 
     local GIT_STATUS=""
-    [[ -n "$STATUS" ]] && GIT_STATUS+="$STATUS "
-    GIT_STATUS+="$(git_prompt_remote)"
+    [[ -n "$STATUS" ]] && GIT_STATUS+=" $STATUS"
+    GIT_STATUS+=" $(git_prompt_remote)"
     GIT_STATUS+="$(git_prompt_behind)"
     GIT_STATUS+="$(git_prompt_ahead)"
-    GIT_STATUS+="%{$FG[011]%}$(current_branch)"
+    GIT_STATUS+=" %{$FG[011]%}$(current_branch)"
 
     echo $GIT_STATUS
 }
@@ -99,7 +99,7 @@ function vcs_status {
     elif [[ -n "$(current_branch)" ]]; then
         STATUS=$(git_status)
     fi
-    [[ -n "$STATUS" ]] && echo "%{$BG[019]%} $STATUS "
+    [[ -n "$STATUS" ]] && echo " %{$BG[019]%}$STATUS "
 }
 
 function render_top_bar {
@@ -118,7 +118,7 @@ function render_top_bar {
     local LEFT_WIDTH=${#${(S%%)TOP_LEFT//$~ZERO/}}
 
     # Middle (fill)
-    local FILL="\${(l:(($COLUMNS - ($LEFT_WIDTH + $RIGHT_WIDTH + 2))):: :)}"
+    local FILL="\${(l:(($COLUMNS - ($LEFT_WIDTH + $RIGHT_WIDTH + 3))):: :)}"
 
     # Whole bar
     TOP_BAR="%{$BG[018]%} "
@@ -129,21 +129,21 @@ function render_top_bar {
 }
 
 setprompt () {
-    ZSH_THEME_GIT_PROMPT_AHEAD='%{$FG[004]%}↑'
-    ZSH_THEME_GIT_PROMPT_BEHIND='%{$FG[001]%}↓'
-    ZSH_THEME_GIT_PROMPT_REMOTE_MISSING='%{$FG[015]%}*'
+    ZSH_THEME_GIT_PROMPT_AHEAD='%{$FG[green]%}ahead'
+    ZSH_THEME_GIT_PROMPT_BEHIND='%{$FG[yellow]%}behind'
+    ZSH_THEME_GIT_PROMPT_REMOTE_MISSING='%{$FG[red]%}missing'
 
     # Staged
-    ZSH_THEME_GIT_PROMPT_STAGED_ADDED='%{$FG[002]%}A'
-    ZSH_THEME_GIT_PROMPT_STAGED_MODIFIED='%{$FG[002]%}M'
-    ZSH_THEME_GIT_PROMPT_STAGED_RENAMED='%{$FG[002]%}R'
-    ZSH_THEME_GIT_PROMPT_STAGED_DELETED='%{$FG[002]%}D'
+    ZSH_THEME_GIT_PROMPT_STAGED_ADDED='%{$FG[002]%}+'
+    ZSH_THEME_GIT_PROMPT_STAGED_MODIFIED='%{$FG[002]%}*'
+    ZSH_THEME_GIT_PROMPT_STAGED_RENAMED='%{$FG[002]%}/'
+    ZSH_THEME_GIT_PROMPT_STAGED_DELETED='%{$FG[002]%}-'
 
     # Not-staged
-    ZSH_THEME_GIT_PROMPT_UNTRACKED='%{$FG[001]%}?'
-    ZSH_THEME_GIT_PROMPT_MODIFIED='%{$FG[001]%}M'
-    ZSH_THEME_GIT_PROMPT_DELETED='%{$FG[001]%}D'
-    ZSH_THEME_GIT_PROMPT_UNMERGED='%{$FG[001]%}UU'
+    ZSH_THEME_GIT_PROMPT_UNTRACKED='%{$FG[001]%}untracked'
+    ZSH_THEME_GIT_PROMPT_MODIFIED='%{$FG[001]%}modified'
+    ZSH_THEME_GIT_PROMPT_DELETED='%{$FG[001]%}deleted'
+    ZSH_THEME_GIT_PROMPT_UNMERGED='%{$FG[001]%}unmerged'
 
     PROMPT='${(e)TOP_BAR}
 %{$FG[003]%}»%{$FX[reset]%} '

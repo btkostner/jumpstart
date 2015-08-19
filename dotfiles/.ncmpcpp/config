@@ -1,0 +1,21 @@
+song_columns_list_format = "(30)[green]{a} (65)[white]{t} (5)[blue]{n}"
+song_list_format = "{a}{t}{n}"
+song_status_format = "$3%a$9 | $8%t$9 | $4%b$9"
+
+playlist_display_mode = "columns"
+browser_display_mode = "columns"
+search_engine_display_mode = "columns"
+
+jump_to_now_playing_song_at_start = "yes"
+user_interface = "classic"
+header_visibility = "no"
+display_volume_level = "no"
+display_remaining_time = "no"
+
+playlist_disable_highlight_delay = "1"
+message_delay_time = "3"
+
+progressbar_look = "━━─"
+
+main_window_color = "green"
+statusbar_color = "red"
