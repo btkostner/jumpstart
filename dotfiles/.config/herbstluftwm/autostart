@@ -18,6 +18,7 @@ hc mouseunbind --all
 hc unrule -F
 hc unlock
 
+
 ####################
 ## herbstluft colors
 ####################
@@ -28,13 +29,13 @@ hc set window_border_normal_color '#1d1f21'
 hc set window_border_active_color '#c5c8c6'
 
 # spacing
-hc set frame_border_width 10
+hc set frame_border_width 0
 hc set window_border_width 1
 
 hc set snap_distance 10
 hc set snap_gap 5
 hc set frame_padding 0
-hc set frame_gap 0
+hc set frame_gap 10
 hc set window_gap 0
 
 hc set frame_transparent_width 0
@@ -63,7 +64,7 @@ hc keybind $Mod-Return spawn dmenu_run
 hc keybind $Mod-space spawn termite
 
 # herbstluftwm management keys
-hc keybind $Mod-Shift-q quit
+hc keybind $Mod-Shift-Escape quit
 hc keybind $Mod-Shift-r reload
 hc keybind $Mod-Shift-c close
 
@@ -108,12 +109,14 @@ hc mousebind $Mod-Button3 resize
 ## herbstluft tags
 ####################
 
-tag_names=( 0001 0010 0011 0100 0101 0110 0111 1000 1001 )
+tag_names=( 一 二 三 四 五 六 七 八 九 )
 tag_keys=( {1..9} 0 )
 
+hc rename default "${tag_names[0]}" || true
+
 for i in ${!tag_names[@]} ; do
-    hc add "${tag_names[$i]}"
     key="${tag_keys[$i]}"
+    hc add "${tag_names[$i]}"
     if ! [ -z "$key" ] ; then
         hc keybind "$Mod-$key" use_index "$i"
         hc keybind "$Mod-Shift-$key" move_index "$i"
@@ -151,9 +154,9 @@ herbstclient chain $clientsend&
 ## panel startup
 ####################
 
-# panel=~/.config/herbstluftwm/panel.sh
-# [ -x "$panel" ] || panel=/etc/xdg/herbstluftwm/panel.sh
-# for monitor in $(herbstclient list_monitors | cut -d: -f1) ; do
-#     # start it on each monitor
-#     "$panel" $monitor &
-# done
+panel=~/.config/herbstluftwm/panel.sh
+[ -x "$panel" ] || panel=/etc/xdg/herbstluftwm/panel.sh
+for monitor in $(herbstclient list_monitors | cut -d: -f1) ; do
+    # start it on each monitor
+    "$panel" $monitor &
+done
