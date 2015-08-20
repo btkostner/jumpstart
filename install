@@ -181,7 +181,6 @@ install mpv
 echo "============= WM ============="
 
 # stuff for awesome panel
-install translate-git
 install otf-ipafont
 install dzen2-xft-xpm-xinerama-git
 install dmenu2
@@ -189,6 +188,8 @@ install dmenu2
 install feh
 install compton
 install herbstluftwm
+
+install scrot
 
 ####################
 # chrome setup

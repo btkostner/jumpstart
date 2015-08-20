@@ -175,7 +175,7 @@ hc pad $monitor $(($panel_height + 10))
                 exit
                 ;;
             focus_changed|window_title_changed)
-              windowtitle="$(translate en ja ${cmd[@]:2})"
+              windowtitle="${cmd[@]:2}"
                 ;;
             #player)
             #    ;;
