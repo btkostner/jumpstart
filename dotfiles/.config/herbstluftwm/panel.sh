@@ -66,7 +66,7 @@ hc pad $monitor $(($panel_height + 10))
     while true ; do
         # "date" output is checked once a second, but an event is only
         # generated if the output changed compared to the previous run.
-        date +$'date\t^fg(#ffffff)%I^fg(#969896):%M, ^fg(#ffffff)%A ^fg(#969896)%m-^fg(#ffffff)%d^fg(#969896)-%Y'
+        date +$'date\t^fg(#ffffff)%I時 ^fg(#969896)%M分, ^fg(#ffffff)%A ^fg(#969896)%m月 ^fg(#ffffff)%d日 ^fg(#969896)%Y年'
         sleep 1 || break
     done > >(uniq_linebuffered) &
     childpid=$!
