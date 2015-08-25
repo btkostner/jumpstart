@@ -188,6 +188,7 @@ install dmenu2
 install feh
 install compton
 install herbstluftwm
+install i3lock
 
 install scrot
 
@@ -207,7 +208,8 @@ echo "============ ATOM ============"
 
 install atom-editor
 
-apm install -c isotope-ui todo-show sort-lines project-manager language-jade editorconfig color-picker stylus minimap minimap-git-diff
+apm install -c isotope-ui todo-show sort-lines project-manager language-jade editorconfig color-picker stylus minimap minimap-git-diff minimap-pigments
+pigments
 
 ####################
 # copy dotfiles

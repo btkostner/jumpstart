@@ -1,0 +1,7 @@
+#!/bin/bash
+
+echo -n "Mount Address?\n"
+read mad
+
+sudo cryptsetup open /dev/lvm/prive prive
+sudo mount /dev/mapper/prive $mad
