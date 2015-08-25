@@ -1,7 +1,12 @@
 #!/bin/bash
 
-echo -n "Mount Address?\n"
-read mad
+if [[ $# < 1 ]]; then
+  mtp=/mnt
+else
+  mtp=$1
+fi
 
 sudo cryptsetup open /dev/lvm/prive prive
-sudo mount /dev/mapper/prive $mad
+sudo mount /dev/mapper/prive $mtp
+
+

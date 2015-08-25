@@ -188,9 +188,17 @@ install dmenu2
 install feh
 install compton
 install herbstluftwm
-install i3lock
 
 install scrot
+
+####################
+# script stuff
+####################
+
+echo "=========== SCRIPT ==========="
+
+install i3lock
+install rsync
 
 ####################
 # chrome setup

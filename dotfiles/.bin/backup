@@ -1,0 +1,7 @@
+#!/bin/bash
+
+uncrypt
+
+sudo rsync -aAXv $HOME /mnt
+
+recrypt

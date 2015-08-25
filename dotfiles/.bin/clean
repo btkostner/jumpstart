@@ -1,0 +1,5 @@
+#!/bin/bash
+
+rm ~/.bash_history
+rm ~/.zsh_history
+

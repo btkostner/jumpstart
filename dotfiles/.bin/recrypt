@@ -1,0 +1,12 @@
+#!/bin/bash
+
+if [[ $# < 1 ]]; then
+  mtp=/mnt
+else
+  mtp=$1
+fi
+
+sudo umount $mtp
+sudo cryptsetup close prive
+
+clean
