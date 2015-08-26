@@ -82,7 +82,7 @@ fi
 
 echo "============= AG ============="
 
-install the_silver_searcher # just plop this here
+install the_silver_searcher
 
 ####################
 # vim setup
@@ -166,21 +166,11 @@ echo "============ CAVA ============"
 install cava
 
 ####################
-# twitch setup
-####################
-
-echo "=========== TWITCH ==========="
-
-install livestreamer
-install mpv
-
-####################
 # wm setup
 ####################
 
 echo "============= WM ============="
 
-# stuff for awesome panel
 install otf-ipafont
 install dzen2-xft-xpm-xinerama-git
 install dmenu2
@@ -197,6 +187,8 @@ install scrot
 
 echo "=========== SCRIPT ==========="
 
+install livestreamer
+install mpv
 install i3lock
 install rsync
 
