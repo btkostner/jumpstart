@@ -16,6 +16,8 @@ font="-*-IPAPGothic-*-*-*-*-12-*-*-*-*-*-*-*"
 bgcolor='#1d1f21'
 fgcolor='#969896'
 
+hostname=$(cat /etc/hostname)
+
 export LC_ALL=ja_JP.utf8
 
 ####
@@ -122,7 +124,7 @@ hc pad $monitor $(($panel_height + 10))
             fi
         done
         echo -n "$separator"
-        echo -n "^bg()^fg(#ffffff)    ${windowtitle//^/^^}^bg()^fg()"
+        echo -n "^bg()^fg()    ${hostname}  >  ^fg(#ffffff)${windowtitle//^/^^}^bg()^fg()"
         # small adjustments
         right="$separator^bg() $date $separator"
         right_text_only=$(echo -n "$right" | sed 's.\^[^(]*([^)]*)..g')
