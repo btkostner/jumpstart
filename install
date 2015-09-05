@@ -14,14 +14,20 @@ function install {
 }
 
 ####################
-# package setup
+# git setup
 ####################
+
+echo "============ GIT ============"
 
 if pacman -Qs git > /dev/null ; then
   echo "git already installed. skipping"
 else
   sudo pacman -S git
 fi
+
+####################
+# yaourt setup
+####################
 
 if pacman -Qs yaourt > /dev/null ; then
   echo "yaourt already installed. skipping"
@@ -45,15 +51,13 @@ else
   rm -r tmp
 fi
 
+####################
+# npm setup
+####################
+
+echo "============ NPM ============"
+
 install npm
-
-####################
-# git setup
-####################
-
-echo "============ GIT ============"
-
-install git
 
 ####################
 # zsh setup
