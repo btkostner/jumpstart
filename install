@@ -201,6 +201,7 @@ install rsync
 install xwinwrap
 install mplayer
 install mpv
+install imagemagick
 
 ####################
 # chrome setup
