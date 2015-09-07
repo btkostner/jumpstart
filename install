@@ -196,9 +196,11 @@ install scrot
 echo "=========== SCRIPT ==========="
 
 install livestreamer
-install mpv
 install i3lock
 install rsync
+install xwinwrap
+install mplayer
+install mpv
 
 ####################
 # chrome setup

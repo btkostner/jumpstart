@@ -10,7 +10,6 @@ jumpstart is a group of files useful for post-install arch setup.
 * [Installation](#installation)
 * [Roadmap](#roadmap)
 * [FAQ](#faq)
-* [License](#license)
 
 ## <a name="installation"></a> Installation
 
@@ -33,8 +32,6 @@ Please look over all files before running the install script. I am not responsib
 
 ### This simple install script seems super useful. Can I use it?
 
-see [license](#license)
+Sure. Enjoy.
 
-## <a name="license"></a> License
 
-WTFPL. Enjoy.

@@ -1,0 +1,3 @@
+#!/bin/bash
+xwinwrap -s -g 1920x1080+0+0 -ov -- mplayer -wid WID -quiet -nosound ~/.wallpaperL.mp4 -loop 0 & xwinwrap -s -g 1920x1080+1920+0 -ov -- mplayer -wid WID -quiet -nosound ~/.wallpaperR.mp4 -loop 0
+
