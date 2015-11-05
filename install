@@ -219,8 +219,31 @@ echo "============ ATOM ============"
 
 install atom-editor
 
-apm install -c isotope-ui todo-show sort-lines project-manager language-jade editorconfig color-picker stylus minimap minimap-git-diff minimap-pigments
-pigments
+apm install -c \
+  isotope-ui \
+  todo-show \
+  project-manager \
+  language-jade \
+  editorconfig \
+  color-picker \
+  stylus \
+  minimap \
+  minimap-git-diff \
+  minimap-pigments \
+  pigments \
+  atom-css-comb \
+  git-control \
+  go-plus \
+  language-ejs \
+  lines \
+  linter \
+  linter-jscs \
+  minimap-bookmarks \
+  minimap-find-and-replace \
+  minimap-highlight-selected \
+  terminal-plus \
+  tool-bar \
+  tool-bar-almighty
 
 ####################
 # copy dotfiles

@@ -30,3 +30,17 @@
   "css-comb":
     config: "common"
   "todo-show": {}
+  minimap:
+    plugins:
+      bookmarks: true
+      "find-and-replace": true
+      "git-diff": true
+      pigments: true
+  "atom-css-comb":
+    readyMadeConfigs: "cscomb"
+  "tool-bar":
+    position: "Left"
+    iconSize: "16px"
+  "atom-terminal": {}
+  "linter-jscs": {}
+  linter: {}
