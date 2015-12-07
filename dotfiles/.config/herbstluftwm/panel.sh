@@ -8,10 +8,10 @@ if [ -z "$geometry" ] ;then
     exit 1
 fi
 # geometry has the format W H X Y
-x=$((${geometry[0]} + 10))
-y=$((${geometry[1]} + 10))
-panel_width=$((${geometry[2]} - 20))
-panel_height=32
+x=$((${geometry[0]} + 40))
+y=$((${geometry[1]} + 40))
+panel_width=$((${geometry[2]} - 80))
+panel_height=40
 font="-*-IPAPGothic-*-*-*-*-12-*-*-*-*-*-*-*"
 bgcolor='#1d1f21'
 fgcolor='#969896'
@@ -55,7 +55,7 @@ else
     }
 fi
 
-hc pad $monitor $(($panel_height + 10))
+hc pad $monitor $(($panel_height + 40))
 
 {
     ### Event generator ###
@@ -91,13 +91,13 @@ hc pad $monitor $(($panel_height + 10))
         for i in "${tags[@]}" ; do
             case ${i:0:1} in
                 '#')
-                    echo -n "^bg(#b5bd68)^fg(#1d1f21)"
+                    echo -n "^bg(#8abeb7)^fg(#1d1f21)"
                     ;;
                 '+')
                     echo -n "^bg(#969896)^fg(#1d1f21)"
                     ;;
                 '%')
-                    echo -n "^bg(#b5bd68)^fg(#1d1f21)"
+                    echo -n "^bg(#8abeb7)^fg(#1d1f21)"
                     ;;
                 '-')
                     echo -n "^bg(#969896)^fg(#1d1f21)"
@@ -112,24 +112,17 @@ hc pad $monitor $(($panel_height + 10))
                     echo -n "^bg()^fg(#969896)"
                     ;;
             esac
-            if [ ! -z "$dzen2_svn" ] ; then
-                # clickable tags if using SVN dzen
-                echo -n "  ^ca(1,\"${herbstclient_command[@]:-herbstclient}\" "
-                echo -n "focus_monitor \"$monitor\" && "
-                echo -n "\"${herbstclient_command[@]:-herbstclient}\" "
-                echo -n "use \"${i:1}\") ${i:1} ^ca()  "
-            else
-                # non-clickable tags if using older dzen
-                echo -n "  ${i:1}  "
-            fi
+            echo -n "    ^ca(1,\"${herbstclient_command[@]:-herbstclient}\" "
+            echo -n "focus_monitor \"$monitor\" && "
+            echo -n "\"${herbstclient_command[@]:-herbstclient}\" "
+            echo -n "use \"${i:1}\") ${i:1} ^ca()   "
         done
-        echo -n "$separator"
-        echo -n "^bg()^fg()    ${hostname}  >  ^fg(#ffffff)${windowtitle//^/^^}^bg()^fg()"
+        echo -n "^bg()     ^fg(#ffffff)${windowtitle//^/^^}^bg()^fg()"
         # small adjustments
-        right="$separator^bg() $date $separator"
+        right="^bg() $date"
         right_text_only=$(echo -n "$right" | sed 's.\^[^(]*([^)]*)..g')
         # get width of right aligned text.. and add some space..
-        width=$($textwidth "$font" "$right_text_only    ")
+        width=$($textwidth "$font" "$right_text_only")
         echo -n "^pa($(($panel_width - $width)))$right"
         echo
 

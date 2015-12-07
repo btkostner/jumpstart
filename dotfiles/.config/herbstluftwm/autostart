@@ -32,19 +32,20 @@ hc set window_border_active_color '#c5c8c6'
 hc set frame_border_width 0
 hc set window_border_width 1
 
-hc set snap_distance 10
-hc set snap_gap 5
+hc set snap_distance 0
+hc set snap_gap 0
 hc set frame_padding 0
-hc set frame_gap 0
-hc set window_gap 10
+hc set frame_gap 40
+hc set window_gap 0
 
 hc set frame_transparent_width 0
-hc set frame_bg_transparent 1
-hc set frame_active_opacity 0
-hc set frame_normal_opacity 0
+hc set frame_bg_transparent 0
+hc set frame_active_opacity 1
+hc set frame_normal_opacity 1
 
+hc set always_show_frame 0
 hc set smart_window_surroundings 0
-hc set smart_frame_surroundings 1
+hc set smart_frame_surroundings 0
 hc set mouse_recenter_gap 0
 
 ####################
@@ -55,13 +56,13 @@ hc set mouse_recenter_gap 0
 Mod=Mod4 # super key
 
 # non herbstluft keybindings
-hc keybind XF86AudioRaiseVolume spawn "pactl set-sink-volume 1 +1%"
-hc keybind XF86AudioLowerVolume spawn "pactl set-sink-volume 1 -1%"
-hc keybind XF86AudioMute spawn "pactl set-sink-mute 1 toggle"
+hc keybind XF86AudioRaiseVolume spawn "pactl set-sink-volume 2 +1%"
+hc keybind XF86AudioLowerVolume spawn "pactl set-sink-volume 2 -1%"
+hc keybind XF86AudioMute spawn "pactl set-sink-mute 2 toggle"
 
 # app launching keybindings
 hc keybind $Mod-Escape spawn "lock"
-hc keybind $Mod-Return spawn "dmenu_run -w 1900 -h 32 -y 10 -x 10"
+hc keybind $Mod-Return spawn dmenu_run -sb '#8abeb7' -sf '#1d1f21' -w 1840 -h 40 -y 40 -x 40
 hc keybind $Mod-space spawn "termite"
 
 # herbstluftwm management keys
@@ -160,4 +161,5 @@ panel=~/.config/herbstluftwm/panel.sh
 for monitor in $(herbstclient list_monitors | cut -d: -f1) ; do
     # start it on each monitor
     "$panel" $monitor &
+    # herbstclient pad $monitor 30 30 30 30
 done

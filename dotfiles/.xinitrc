@@ -1,7 +1,8 @@
+#!/bin/bash
 
 exec start-pulseaudio-x11 &
 
-exec feh --bg-scale ~/.wallpaper.jpg &
+exec feh --bg-center ~/.wallpaper.png &
 exec compton &
 
 if [ -z "${DBUS_SESSION_BUS_ADDRESS-}" ] && type dbus-launch >/dev/null; then

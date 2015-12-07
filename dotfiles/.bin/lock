@@ -1,3 +1,4 @@
 #!/bin/bash
-scrot ~/.lock.png -e "convert -scale '10%' -scale '1000%' -morphology Close Square -morphology Open Square ~/.lock.png ~/.lock.png" && \
-i3lock -i ~/.lock.png
+mkdir -p /tmp/$USER
+scrot /tmp/$USER/lock.png -e "convert -scale '10%' -scale '1000%' -morphology Close Square -morphology Open Square /tmp/$USER/lock.png /tmp/$USER/lock.png" && \
+i3lock -i /tmp/$USER/lock.png
