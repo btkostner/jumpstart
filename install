@@ -48,7 +48,9 @@ else
   cd ..
 
   cd ..
-  rm -r tmp
+  rm -rf tmp
+
+  yaourt -Syu
 fi
 
 ####################
@@ -190,6 +192,8 @@ install herbstluftwm
 
 install termite
 install scrot
+install ranger
+install feh
 
 ####################
 # script stuff
@@ -200,8 +204,6 @@ echo "=========== SCRIPT ==========="
 install livestreamer
 install i3lock
 install rsync
-install xwinwrap
-install mplayer
 install mpv
 install imagemagick
 
