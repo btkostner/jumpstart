@@ -1,5 +1,7 @@
 #!/bin/bash
 
+numlockx &
+
 exec start-pulseaudio-x11 &
 
 exec feh --bg-center ~/.wallpaper.png &
