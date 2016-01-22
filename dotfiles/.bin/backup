@@ -1,7 +1,25 @@
 #!/bin/bash
 
-uncrypt
+set -e
 
-sudo rsync -aAXv $HOME /mnt
+echo "Drive? (/dev/sda1) [Enter]:"
+read drive
 
-recrypt
+echo "Name? (prive) [Enter]:"
+read name
+
+sudo cryptsetup --type luks open $drive $name
+sudo mount -t ext4 /dev/mapper/$name /mnt
+
+sudo rsync -aAXv --delete \
+  --exclude 'Downloads' \
+  --exclude 'node_modules' \
+  --exclude '.npm' \
+  --progress $HOME /mnt
+
+sudo umount /mnt
+sudo cryptsetup close $name
+
+rm ~/.zsh_history
+
+echo "Complete!"
