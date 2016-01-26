@@ -2,7 +2,7 @@
 
 set -e
 
-echo "Drive? (/dev/sda1) [Enter]:"
+echo "Drive? (/dev/sdd) [Enter]:"
 read drive
 
 echo "Name? (prive) [Enter]:"
@@ -11,11 +11,12 @@ read name
 sudo cryptsetup --type luks open $drive $name
 sudo mount -t ext4 /dev/mapper/$name /mnt
 
-sudo rsync -aAXv --delete \
+sudo rsync -arAXs --info=progress2 --delete \
   --exclude 'Downloads' \
   --exclude 'node_modules' \
   --exclude '.npm' \
-  --progress $HOME /mnt
+  --exclude 'VirtualBox VMs' \
+  $HOME /mnt
 
 sudo umount /mnt
 sudo cryptsetup close $name
