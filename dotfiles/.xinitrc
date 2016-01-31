@@ -4,7 +4,7 @@ numlockx &
 
 exec start-pulseaudio-x11 &
 
-exec feh --bg-center ~/.wallpaper.png &
+exec feh --bg-fill ~/.wallpaper.jpg &
 exec compton &
 
 if [ -z "${DBUS_SESSION_BUS_ADDRESS-}" ] && type dbus-launch >/dev/null; then
