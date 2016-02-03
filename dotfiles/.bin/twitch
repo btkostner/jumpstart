@@ -1,11 +1,11 @@
 #!/bin/bash
 
-if [ $# == 0 ]; then
-  echo "need more info"
-else
-  if [ $# == 1 ]; then
-    livestreamer -p mpv twitch.tv/$1 source
-  else
-    livestreamer -p mpv twitch.tv/$@
-  fi
+set -e
+
+if [[ $# < 1 ]]; then
+  echo "Usage: twitch [STREAM] [QUALITY]"
+  exit 1
 fi
+
+livestreamer -p mpv twitch.tv/$@ --default-stream best > /dev/null &
+
