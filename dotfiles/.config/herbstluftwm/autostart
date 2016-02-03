@@ -56,8 +56,8 @@ hc set mouse_recenter_gap 0
 Mod=Mod4 # super key
 
 # non herbstluft keybindings
-hc keybind XF86AudioRaiseVolume spawn "pactl set-sink-volume 2 +1%"
-hc keybind XF86AudioLowerVolume spawn "pactl set-sink-volume 2 -1%"
+hc keybind XF86AudioRaiseVolume spawn "pactl set-sink-volume 2 +5%"
+hc keybind XF86AudioLowerVolume spawn "pactl set-sink-volume 2 -5%"
 hc keybind XF86AudioMute spawn "pactl set-sink-mute 2 toggle"
 
 # app launching keybindings
@@ -92,7 +92,7 @@ hc keybind $Mod-e split right 0.5
 hc keybind $Mod-r remove
 
 # resizing frames
-resizestep=0.01
+resizestep=0.025
 hc keybind $Mod-Left        resize left +$resizestep
 hc keybind $Mod-Down        resize down +$resizestep
 hc keybind $Mod-Up          resize up +$resizestep

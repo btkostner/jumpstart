@@ -10,8 +10,7 @@ if [[ ! -d $DIR ]]; then
 fi
 
 scrot $DIR/$IMG
-
-convert $DIR/$IMG -scale '5%' -scale '2000%'  $DIR/$IMG
+convert $DIR/$IMG -scale '5%' -scale '2000%' $DIR/$IMG
 
 i3lock \
   --textcolor=00000000 \
