@@ -1,4 +1,30 @@
 #!/bin/bash
-mkdir -p /tmp/$USER
-scrot /tmp/$USER/lock.png -e "convert -scale '10%' -scale '1000%' -morphology Close Square -morphology Open Square /tmp/$USER/lock.png /tmp/$USER/lock.png" && \
-i3lock -i /tmp/$USER/lock.png
+
+set -e
+
+DIR=/tmp/$USER
+IMG=lock.png
+
+if [[ ! -d $DIR ]]; then
+  mkdir $DIR
+fi
+
+scrot $DIR/$IMG
+
+convert $DIR/$IMG -scale '5%' -scale '2000%'  $DIR/$IMG
+
+i3lock \
+  --textcolor=00000000 \
+  --keyhlcolor=ffffffcc \
+  --bshlcolor=000000cc \
+  --linecolor=00000000 \
+  --insidecolor=00000000 \
+  --insidevercolor=00000000 \
+  --insidewrongcolor=00000000 \
+  --ringcolor=ffffff80 \
+  --ringvercolor=81a2be80 \
+  --ringwrongcolor=cc666680 \
+  -i $DIR/$IMG > /dev/null 2>&1
+
+rm $DIR/$IMG
+

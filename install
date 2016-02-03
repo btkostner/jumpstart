@@ -204,7 +204,7 @@ install feh
 echo "=========== SCRIPT ==========="
 
 install livestreamer
-install i3lock
+install i3lock-color-git
 install rsync
 install mpv
 install imagemagick
