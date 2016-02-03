@@ -2,25 +2,46 @@
 
 set -e
 
-echo "Drive? (/dev/sdd) [Enter]:"
-read drive
+lsblk
 
-echo "Name? (prive) [Enter]:"
-read name
+drive=$(ls -d -1 /dev/* | grep 'sd[a-z]' | grep -v '[0-9]$' | tail -n 1)
+read -e -i "$drive" -p "Please enter backup drive location: " driveInput
+drive=${driveInput:-$drive}
+
+name="prive"
+read -e -i "$name" -p "Please enter luks container name: " nameInput
+name=${nameInput:-$name}
+
+host=$(hostname)
+date=$(date +%s)
 
 sudo cryptsetup --type luks open $drive $name
 sudo mount -t ext4 /dev/mapper/$name /mnt
+
+if [ ! -f /mnt/backups ]; then
+  sudo touch /mnt/backups
+fi
+
+if sudo grep -q $host /mnt/backups; then
+  pastDate=$(sudo cat /mnt/backups | grep $hostname | sed s/$host\ //)
+  pastDiff=$(bc <<< "($date-$pastDate)/86400")
+  echo "Last backup $pastDiff days ago"
+  sudo sed -i -e "/s$host.*/$host $date/" /mnt/backups
+else
+  echo "$host $date" | sudo tee /mnt/backups > /dev/null
+fi
 
 sudo rsync -arAXs --info=progress2 --delete \
   --exclude 'Downloads' \
   --exclude 'node_modules' \
   --exclude '.npm' \
   --exclude 'VirtualBox VMs' \
-  $HOME /mnt
+  $HOME/ /mnt/$host
 
 sudo umount /mnt
 sudo cryptsetup close $name
 
-rm ~/.zsh_history
+if [ ! -f ~/.zsh_history ]; then
+  rm ~/.zsh_history
+fi
 
-echo "Complete!"
