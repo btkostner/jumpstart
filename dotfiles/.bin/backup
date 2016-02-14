@@ -23,10 +23,10 @@ if [ ! -f /mnt/backups ]; then
 fi
 
 if sudo grep -q $host /mnt/backups; then
-  pastDate=$(sudo cat /mnt/backups | grep $hostname | sed s/$host\ //)
+  pastDate=$(sudo cat /mnt/backups | grep $host | sed s/$host\ //)
   pastDiff=$(bc <<< "($date-$pastDate)/86400")
   echo "Last backup $pastDiff days ago"
-  sudo sed -i -e "/s$host.*/$host $date/" /mnt/backups
+  sudo sed -i -e "s/$host.*/$host $date/" /mnt/backups
 else
   echo "$host $date" | sudo tee /mnt/backups > /dev/null
 fi
