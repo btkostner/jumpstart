@@ -187,6 +187,7 @@ install dzen2-xft-xpm-xinerama-git
 install dmenu2
 install xdotool
 install numlockx
+install xscreensaver
 
 install feh
 install compton

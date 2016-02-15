@@ -1,15 +1,10 @@
 #!/bin/bash
+set -e
 
-installdir=/
-
-XDG_CONFIG_HOME="${XDG_CONFIG_HOME:-$HOME/.config}"
-defaultpanel="$XDG_CONFIG_HOME/herbstluftwm/panel.sh"
-
-[ -x "$defaultpanel" ] || defaultpanel="$installdir/etc/xdg/herbstluftwm/panel.sh"
-
-panelcmd="${1:-$defaultpanel}"
+panelcmd=~./panel.sh
 
 herbstclient emit_hook quit_panel
+killall dzen2
 
 for i in $(herbstclient list_monitors | cut -d':' -f1) ; do
     "$panelcmd" $i &

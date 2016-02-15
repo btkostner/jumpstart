@@ -158,9 +158,15 @@ herbstclient chain $clientsend&
 ####################
 
 panel=~/.config/herbstluftwm/panel.sh
-[ -x "$panel" ] || panel=/etc/xdg/herbstluftwm/panel.sh
-for monitor in $(herbstclient list_monitors | cut -d: -f1) ; do
-    # start it on each monitor
-    "$panel" $monitor &
-    # herbstclient pad $monitor 30 30 30 30
+for monitor in $(herbstclient list_monitors | cut -d: -f1); do
+  "$panel" $monitor &
+done
+
+####################
+## wallpaper setup
+####################
+
+wallpaper=~/.config/herbstluftwm/wallpaper.sh
+for monitor in $(herbstclient list_monitors | cut -d: -f1); do
+  "$wallpaper" $monitor &
 done
