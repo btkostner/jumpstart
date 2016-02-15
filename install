@@ -209,6 +209,7 @@ install i3lock-color-git
 install rsync
 install mpv
 install imagemagick
+install gifsicle
 
 ####################
 # chrome setup

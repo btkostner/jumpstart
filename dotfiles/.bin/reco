@@ -1,0 +1,43 @@
+#!/bin/bash
+set -e
+
+if [[ $1 == '--help' ]]; then
+  echo "Usage reco DESKTOP TIME FILE"
+  echo "Example: 'reco 1 10 test.gif'"
+  echo "Creates an animated gif of your screen."
+  exit 0
+fi
+
+if [ $# -lt 3 ]; then
+  echo "reco: missing operand"
+  echo "Try 'reco --help' for more information."
+  exit 1
+fi
+
+SCREEN=$1
+TIME=$2
+FILE=$3
+
+GEO=($(herbstclient monitor_rect "$SCREEN"))
+DATE=$(date +%s)
+
+if [ -z "$GEO" ]; then
+  echo "Invalid monitor $SCREEN"
+  exit 1
+fi
+
+mkdir -p "/tmp/$USER/reco/$DATE"
+
+echo "Recording"
+
+ffmpeg -video_size "${GEO[2]}x${GEO[3]}" -framerate 30 -t "$TIME" -f x11grab -i ":0.0+${GEO[0]},${GEO[1]}" -c:v libx264 -qp 0 -preset ultrafast "/tmp/$USER/reco/$DATE/raw.mkv" > /dev/null
+
+echo "Done Recording"
+
+ffmpeg -i "/tmp/$USER/reco/$DATE/raw.mkv" -pix_fmt rgb24 "/tmp/$USER/reco/$DATE/raw.gif"
+gifsicle -O2 "/tmp/$USER/reco/$DATE/raw.gif" -o "$FILE"
+
+rm -r "/tmp/$USER/reco/$DATE"
+
+exit 0
+
