@@ -1,48 +1,84 @@
 #!/bin/bash
 
 ####################
-# functions
+# script variables
 ####################
 
+R=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
+
+####################
+# script functions
+####################
+
+function header {
+  L=`expr length "$1"`
+  P=`expr 79 - $L`
+  printf '%*s' "$P" | tr ' ' "=" && echo " $1"
+}
+
 function install {
-  if yaourt -Qs $1 > /dev/null ; then
-    echo "$1 already installed. skipping"
+  C="pacman"
+  if command -v yaourt > /dev/null ; then
+    C="yaourt"
+  fi
+
+  if $C -Qs $1 > /dev/null ; then
+    echo "Skipping installation of $1"
   else
-    echo "installing $1"
-    yaourt -S --noconfirm $1
+    echo "Installing $1"
+    $C -S --noconfirm $1
   fi
 }
 
+function clone {
+  git clone --depth=1 https://github.com/$1.git $2
+}
+
+function copy {
+  D=(`find $1 -type d | sed -r "s/^$1\///"`)
+  F=(`find $1 -type f \( ! -iname "*.gitkeep" \) | sed -r "s/^$1\///"`)
+
+  mkdir -p $2
+
+  for d in "${D[@]:1}" ; do
+    mkdir -p $2/$d
+  done
+
+  for f in "${F[@]}" ; do
+    if [ "$3" = true ] ; then
+      cp $R/$1/$f $2/$f
+    else
+      ln -s $R/$1/$f $2/$f
+    fi
+  done
+}
+
 ####################
-# git setup
+# script requirements
 ####################
 
-echo "============ GIT ============"
+header git
 
-if pacman -Qs git > /dev/null ; then
-  echo "git already installed. skipping"
+install git
+
+header rsync
+
+install rsync
+
+header yaourt
+
+if command -v yaourt > /dev/null ; then
+  echo "Skipping installation of yaourt"
 else
-  sudo pacman -S git
-fi
-
-####################
-# yaourt setup
-####################
-
-if pacman -Qs yaourt > /dev/null ; then
-  echo "yaourt already installed. skipping"
-else
-  echo "=========== YAOURT ==========="
-
   mkdir tmp
   cd tmp
 
-  git clone https://aur.archlinux.org/package-query.git
+  git clone https://aur.archlinux.org/package-query.git package-query
   cd package-query
   makepkg -si
   cd ..
 
-  git clone https://aur.archlinux.org/yaourt.git
+  git clone https://aur.archlinux.org/yaourt.git yaourt
   cd yaourt
   makepkg -si
   cd ..
@@ -54,10 +90,29 @@ else
 fi
 
 ####################
+# skeleton setup
+####################
+
+header skeleton
+
+mkdir -p ~/Downloads
+mkdir -p ~/Projects/Art
+mkdir -p ~/Projects/Desktop
+mkdir -p ~/Projects/Server
+mkdir -p ~/Projects/Web
+mkdir -p ~/Virtual\ Machines
+
+####################
+# xorg setup
+####################
+
+copy xorg ~/
+
+####################
 # npm setup
 ####################
 
-echo "============ NPM ============"
+header npm
 
 install npm
 
@@ -65,28 +120,29 @@ install npm
 # zsh setup
 ####################
 
-echo "============ ZSH  ============"
+header zsh
 
 install zsh
 install zsh-completions
 
+mkdir -p ~/.zsh
+
+clone b4b4r07/zplug ~/.zsh
+
+copy zsh ~/
+
 if echo $SHELL | grep -q "zsh" ; then
-  echo "zsh already default shell. skipping"
+  echo "zsh is already default shell"
 else
   echo "setting zsh to default shell"
   chsh -s /usr/bin/zsh
-fi
-
-if [ ! -d ~/.oh-my-zsh ] ; then
-  echo "========== OH-MY-ZSH ========="
-  git clone --depth=1 https://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh
 fi
 
 ###################
 # ag setup
 ###################
 
-echo "============= AG ============="
+header ag
 
 install the_silver_searcher
 
@@ -94,14 +150,17 @@ install the_silver_searcher
 # vim setup
 ####################
 
-echo "============= VIM ============"
+header vim
 
 install vim
-install tidyhtml
-sudo npm install -g csslint
-sudo npm install -g jsonlint
 
-git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+mkdir -p ~/.vim/bundle
+
+clone VundleVim/Vundle.vim ~/.vim/bundle/Vundle.vim
+
+copy vim ~/
+
+vim +PluginInstall +qall +quit
 
 git config --global core.editor "vim"
 
@@ -109,40 +168,30 @@ git config --global core.editor "vim"
 # keychain setup
 ####################
 
-echo "========== KEYCHAIN =========="
+header keychain
 
 install openssh
 install keychain
+
+copy ssh ~/.ssh
 
 ####################
 # font setup
 ####################
 
-echo "=========== FONTS ============"
+header fonts
 
 install ttf-liberation
 
 ####################
-# pulseaudio setup
+# audio setup
 ####################
 
-echo "========= PULSEAUDIO ========="
+header audio
 
 install pulseaudio
 install pavucontrol
 install pulseaudio-alsa
-
-if lsmod | grep -q "oss" ; then
-  rmmod snd_pcm_oss # https://wiki.archlinux.org/index.php/PulseAudio
-fi
-
-####################
-# mopidy setup
-####################
-
-echo "=========== MOPIDY ==========="
-
-install mopidy
 
 install gstreamer0.10
 install gstreamer0.10-base
@@ -154,31 +203,49 @@ install gstreamer0.10-bad-plugins
 install gstreamer0.10-ugly
 install gstreamer0.10-python
 
+if lsmod | grep -q "oss" ; then
+  rmmod snd_pcm_oss # https://wiki.archlinux.org/index.php/PulseAudio
+fi
+
+####################
+# mopidy setup
+####################
+
+header mopidy
+
+install mopidy
+
 install mopidy-soundcloud
 install mopidy-spotify
 install mopidy-youtube
+
+copy mopidy ~/.config/mopidy true
 
 ####################
 # ncmpcpp setup
 ####################
 
-echo "=========== NCMPCPP =========="
+header ncmpcpp
 
 install ncmpcpp
+
+copy ncmpcpp ~/.ncmpcpp
 
 ####################
 # cava setup
 ####################
 
-echo "============ CAVA ============"
+header cava
 
 install cava
 
+copy cava ~/.config/cava
+
 ####################
-# wm setup
+# herbstluft setup
 ####################
 
-echo "============= WM ============="
+header herbstluft
 
 install systemd-numlockontty
 
@@ -198,11 +265,15 @@ install scrot
 install ranger
 install feh
 
+copy herbstluftwm ~/.config/herbstluftwm
+copy htop ~/.config/htop
+copy termite ~/.config/termite
+
 ####################
 # script stuff
 ####################
 
-echo "=========== SCRIPT ==========="
+header script
 
 install livestreamer
 install i3lock-color-git
@@ -211,11 +282,13 @@ install mpv
 install imagemagick
 install gifsicle
 
+copy bin ~/.bin
+
 ####################
 # chrome setup
 ####################
 
-echo "=========== CHROME ==========="
+header chrome
 
 install google-chrome
 
@@ -223,58 +296,21 @@ install google-chrome
 # atom setup
 ####################
 
-echo "============ ATOM ============"
+header atom
 
 install atom-editor
 
 apm install -c \
+  atom-jade \
   isotope-ui \
-  todo-show \
-  project-manager \
-  language-jade \
-  editorconfig \
-  color-picker \
-  stylus \
+  linter-spellcheck \
   minimap \
+  minimap-cursorline \
   minimap-git-diff \
+  minimap-linter \
   minimap-pigments \
   pigments \
-  atom-css-comb \
-  git-control \
-  go-plus \
-  language-ejs \
-  lines \
-  linter \
-  linter-jscs \
-  minimap-bookmarks \
-  minimap-find-and-replace \
-  minimap-highlight-selected \
-  terminal-plus \
-  tool-bar \
-  tool-bar-almighty
+  sort-lines \
+  Stylus
 
-####################
-# copy dotfiles
-####################
-
-echo "========== DOTFILES =========="
-
-echo "moving build directory to home"
-cp -Rf ./dotfiles/. ~/
-
-####################
-# post-dotfiles
-####################
-
-echo "======== POST DOTFILES ======="
-
-systemctl --user enable mopidy.service
-sudo systemctl enable numLockOnTty.service
-
-vim +PluginInstall +qall
-
-####################
-# end of script
-####################
-
-echo "install complete"
+copy atom ~/.atom

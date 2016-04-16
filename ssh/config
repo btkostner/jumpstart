@@ -1,0 +1,27 @@
+# Services
+Host GitHub
+  HostName github.com
+  User git
+  IdentityFile ~/.ssh/github
+
+# Personal Servers
+Host Virgon
+  HostName 159.203.233.189
+  User btkostner
+  IdentityFile ~/.ssh/virgon
+
+Host Picon
+  HostName 192.168.1.3
+  User btkostner
+  IdentityFile ~/.ssh/picon
+
+# elementary Servers
+Host server2
+  HostName server2.elementaryos.org
+  User btkostner
+  IdentityFile ~/.ssh/elementary
+
+Host builds
+  HostName builds.elementaryos.org
+  User btkostner
+  IdentityFile ~/.ssh/elementary

@@ -16,6 +16,7 @@ Plugin 'sjl/gundo.vim'
 Plugin 'airblade/vim-gitgutter'
 
 call vundle#end()
+
 filetype plugin indent on
 
 set number

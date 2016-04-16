@@ -1,0 +1,21 @@
+"*":
+  core:
+    autoHideMenuBar: true
+  editor:
+    invisibles: {}
+  minimap:
+    absoluteMode: true
+    displayMinimapOnLeft: true
+    plugins:
+      cursorline: true
+      cursorlineDecorationsZIndex: 0
+      "git-diff": true
+      "git-diffDecorationsZIndex": 0
+      linter: true
+      linterDecorationsZIndex: 0
+      pigments: true
+      pigmentsDecorationsZIndex: 0
+      "split-diff": true
+      "split-diffDecorationsZIndex": 0
+  welcome:
+    showOnStartup: false

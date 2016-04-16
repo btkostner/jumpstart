@@ -17,7 +17,7 @@ Please look over all files before running the install script. I am not responsib
 
 1. Clone this repo to `<folder>`
 
-  `git clone https://github.com/btkostner/jumpstart.git <folder>`
+  `git clone https://github.com/btkostner/jumpstart.git ~/Project/Desktop/jumpstart`
 
 2. Run install script
 
@@ -33,5 +33,3 @@ Please look over all files before running the install script. I am not responsib
 ### This simple install script seems super useful. Can I use it?
 
 Sure. Enjoy.
-
-
