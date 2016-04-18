@@ -12,8 +12,8 @@ R=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
 
 function header {
   L=`expr length "$1"`
-  P=`expr 79 - $L`
-  printf '%*s' "$P" | tr ' ' "=" && echo " $1"
+  P=`expr 77 - $L`
+  printf '%*s' "$P" | tr ' ' "=" && echo " $1 ="
 }
 
 function install {
@@ -54,6 +54,21 @@ function copy {
 }
 
 ####################
+# recommendation checks
+####################
+
+if [ "$R" = "$HOME/Projects/Desktop/jumpstart" ] ; then
+  printf "running jumpstart from recommended directory in"
+  printf "$HOME/Projects/Desktop/jumpstart"
+else
+  printf "jumpstart is currently running in $D"
+  printf "We recommend storing it in $HOME/Projects/Desktop/jumpstart"
+  read -q -p "Are you sure you want to continue [y/N]"
+  # TODO: add an actual check for this
+  exit
+fi
+
+####################
 # script requirements
 ####################
 
@@ -70,21 +85,18 @@ header yaourt
 if command -v yaourt > /dev/null ; then
   echo "Skipping installation of yaourt"
 else
-  mkdir tmp
-  cd tmp
+  mkdir $D/tmp
 
-  git clone https://aur.archlinux.org/package-query.git package-query
-  cd package-query
+  git clone https://aur.archlinux.org/package-query.git $D/tmp/package-query
+  cd $D/tmp/package-query
   makepkg -si
-  cd ..
 
-  git clone https://aur.archlinux.org/yaourt.git yaourt
-  cd yaourt
+  git clone https://aur.archlinux.org/yaourt.git $D/tmp/yaourt
+  cd $D/tmp/yaourt
   makepkg -si
-  cd ..
 
-  cd ..
-  rm -rf tmp
+  cd $D
+  rm -rf $D/tmp
 
   yaourt -Syu
 fi
