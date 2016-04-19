@@ -3,13 +3,13 @@
 # Environment Variables
 export TERM="xterm-256color"
 
-export ZSH_DID="~/.zsh"
-export ZPLUG_HOME="~/.zsh"
-export HISTFILE="~/.zsh/history"
+export ZSH_DID="$HOME/.zsh"
+export ZPLUG_HOME="$HOME/.zsh"
+export HISTFILE="$HOME/.zsh/history"
 export HISTSIZE=10000
 
 # zplug plugins
-source ~/.zsh/zplug
+source $HOME/.zsh/zplug
 
 zplug "hchbaw/auto-fu.zsh"
 zplug "chriskempson/base16-shell", of:"base16-tomorrow.dark.sh"
