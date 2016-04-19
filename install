@@ -89,11 +89,11 @@ else
 
   git clone https://aur.archlinux.org/package-query.git $D/tmp/package-query
   cd $D/tmp/package-query
-  makepkg -si
+  makepkg -si --noconfirm
 
   git clone https://aur.archlinux.org/yaourt.git $D/tmp/yaourt
   cd $D/tmp/yaourt
-  makepkg -si
+  makepkg -si --noconfirm
 
   cd $D
   rm -rf $D/tmp
@@ -118,7 +118,22 @@ mkdir -p ~/Virtual\ Machines
 # xorg setup
 ####################
 
+install xorg-server
+install xorg-xinit
+install xorg-xdm
+
 copy xorg ~/
+
+sudo systemctl enable xdm
+
+####################
+# interface setup
+####################
+
+install gtk3
+install gtk2
+
+install compton
 
 ####################
 # npm setup
@@ -139,7 +154,7 @@ install zsh-completions
 
 mkdir -p ~/.zsh
 
-clone b4b4r07/zplug ~/.zsh
+clone b4b4r07/zplug ~/.zsh/zplug
 
 copy zsh ~/
 
@@ -149,6 +164,11 @@ else
   echo "setting zsh to default shell"
   chsh -s /usr/bin/zsh
 fi
+
+[[ -f ~/.bash_history ]] && rm ~/.bash_history
+[[ -f ~/.bash_logout ]] && rm ~/.bash_logout
+[[ -f ~/.bash_profile ]] && rm ~/.bash_profile
+[[ -f ~/.bashrc ]] && rm ~/.bashrc
 
 ###################
 # ag setup
@@ -281,6 +301,17 @@ copy herbstluftwm ~/.config/herbstluftwm
 copy htop ~/.config/htop
 copy termite ~/.config/termite
 
+###################
+# virtualbox setup
+###################
+
+header virtualbox
+
+install virtualbox
+install virtualbox-host-dkms
+
+VBoxManage setextradata global GUI/Customizations noMenuBar,noStatusBar 
+
 ####################
 # script stuff
 ####################
@@ -289,7 +320,6 @@ header script
 
 install livestreamer
 install i3lock-color-git
-install rsync
 install mpv
 install imagemagick
 install gifsicle

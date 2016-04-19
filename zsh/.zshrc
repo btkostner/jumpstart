@@ -2,10 +2,10 @@
 
 # Environment Variables
 ZSH_DID=~/.zsh
-ZPLUG_HOME=~/.zsh
+ZPLUG_HOME=~/.zsh/zplug
 
 # zplug plugins
-source ~/.zsh/zplug
+source ~/.zsh/zplug/zplug
 
 zplug "njui/alias-tips"
 zplug "hchbaw/auto-fs.zsh"
