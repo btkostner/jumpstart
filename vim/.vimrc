@@ -16,7 +16,6 @@ Plugin 'sjl/gundo.vim'
 Plugin 'airblade/vim-gitgutter'
 
 call vundle#end()
-
 filetype plugin indent on
 
 set number
@@ -47,7 +46,6 @@ set expandtab
 filetype plugin on
 filetype indent on
 
-set list listchars=tab:\ \ ,trail:·
 
 set nowrap
 set linebreak
