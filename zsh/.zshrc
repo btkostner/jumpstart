@@ -1,16 +1,20 @@
 #!/usr/bin/zsh
 
 # Environment Variables
-ZSH_DID=~/.zsh
-ZPLUG_HOME=~/.zsh/zplug
+export TERM="xterm-256color"
+
+export ZSH_DID="~/.zsh"
+export ZPLUG_HOME="~/.zsh"
+export HISTFILE="~/.zsh/history"
+export HISTSIZE=10000
 
 # zplug plugins
-source ~/.zsh/zplug/zplug
+source ~/.zsh/zplug
 
-zplug "njui/alias-tips"
-zplug "hchbaw/auto-fs.zsh"
+zplug "hchbaw/auto-fu.zsh"
 zplug "chriskempson/base16-shell", of:"base16-tomorrow.dark.sh"
 zplug "nojhan/liquidprompt"
+zplug "zsh-users/zsh-syntax-highlighting"
 
 # install zplug plugins
 if ! zplug check --verbose ; then
@@ -30,4 +34,25 @@ else
   export EDITOR='nano'
 fi
 
+zle-line-init () {
+  auto-fu-init
+}
+
+zle -N zle-line-init
+zle -N zle-keymap-select auto-fu-zle-keymap-select
+
+zstyle ':auto-fu:highlight' input bold
+zstyle ':auto-fu:highlight' completion fg=white
+zstyle ':auto-fu:highlight' completion/one fg=blue
+zstyle ':auto-fu:var' postdisplay ''
+zstyle ':auto-fu:var' track-keymap-skip opp
+zstyle ':completion:*' completer _oldlist _complete
+
 eval $(keychain --eval --agents ssh --quiet --confhost --clear)
+
+# Options
+setopt correct
+setopt hist_ignore_all_dups
+setopt hist_ignore_space
+setopt hist_reduce_blanks
+setopt print_eight_bit

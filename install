@@ -154,7 +154,7 @@ install zsh-completions
 
 mkdir -p ~/.zsh
 
-clone b4b4r07/zplug ~/.zsh/zplug
+clone b4b4r07/zplug ~/.zsh
 
 copy zsh ~/
 
