@@ -3,15 +3,24 @@
 # Environment Variables
 export TERM="xterm-256color"
 
+export PATH="$PATH:$HOME/.bin"
+
 export ZSH_DID="$HOME/.zsh"
 export ZPLUG_HOME="$HOME/.zsh"
 export HISTFILE="$HOME/.zsh/history"
 export HISTSIZE=10000
 
+export LP_USER_ALWAYS=0
+export LP_PERCENTS_ALWAYS=0
+export LP_ENABLE_JOBS=0
+export LP_ENABLE_LOAD=0
+export LP_ENABLE_BATT=0
+export LP_ENABLE_TEMP=0
+
 # zplug plugins
 source $HOME/.zsh/zplug
 
-zplug "hchbaw/auto-fu.zsh"
+zplug "hchbaw/auto-fu.zsh", at:"next"
 zplug "chriskempson/base16-shell", of:"base16-tomorrow.dark.sh"
 zplug "nojhan/liquidprompt"
 zplug "zsh-users/zsh-syntax-highlighting"
@@ -34,19 +43,19 @@ else
   export EDITOR='nano'
 fi
 
-zle-line-init () {
-  auto-fu-init
-}
-
-zle -N zle-line-init
-zle -N zle-keymap-select auto-fu-zle-keymap-select
-
 zstyle ':auto-fu:highlight' input bold
 zstyle ':auto-fu:highlight' completion fg=white
 zstyle ':auto-fu:highlight' completion/one fg=blue
 zstyle ':auto-fu:var' postdisplay ''
 zstyle ':auto-fu:var' track-keymap-skip opp
-zstyle ':completion:*' completer _oldlist _complete
+zstyle ':completion:*' menu _complete
+
+zle-line-init() {
+  auto-fu-init
+}
+
+zle -N zle-line-init
+zle -N zle-keymap-select auto-fu-zle-keymap-select
 
 eval $(keychain --eval --agents ssh --quiet --confhost --clear)
 
