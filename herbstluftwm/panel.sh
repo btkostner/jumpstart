@@ -8,9 +8,9 @@ if [ -z "$geometry" ] ;then
     exit 1
 fi
 # geometry has the format W H X Y
-x=$((${geometry[0]} + 40))
-y=$((${geometry[1]} + 40))
-panel_width=$((${geometry[2]} - 80))
+x=$((${geometry[0]} + 20))
+y=$((${geometry[1]} + 20))
+panel_width=$((${geometry[2]} - 40))
 panel_height=40
 font="-*-IPAPGothic-*-*-*-*-12-*-*-*-*-*-*-*"
 bgcolor='#1d1f21'
@@ -55,7 +55,7 @@ else
     }
 fi
 
-hc pad $monitor $(($panel_height + 40))
+hc pad $monitor $(($panel_height + 20))
 
 {
     ### Event generator ###
@@ -115,7 +115,7 @@ hc pad $monitor $(($panel_height + 40))
             echo -n "    ^ca(1,\"${herbstclient_command[@]:-herbstclient}\" "
             echo -n "focus_monitor \"$monitor\" && "
             echo -n "\"${herbstclient_command[@]:-herbstclient}\" "
-            echo -n "use \"${i:1}\") ${i:1} ^ca()   "
+            echo -n "use \"${i:1}\") ${i:1} ^ca()    "
         done
         echo -n "^bg()     ^fg(#ffffff)${windowtitle//^/^^}^bg()^fg()"
         # small adjustments

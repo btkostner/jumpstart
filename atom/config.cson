@@ -1,8 +1,18 @@
 "*":
+  "atom-css-comb":
+    readyMadeConfigs: "csscomb"
+  "color-picker":
+    automaticReplace: true
   core:
     autoHideMenuBar: true
+    disabledPackages: [
+      "linter-pug"
+    ]
   editor:
+    fontSize: 13
     invisibles: {}
+    scrollPastEnd: true
+    showIndentGuide: true
   minimap:
     absoluteMode: true
     displayMinimapOnLeft: true
@@ -19,3 +29,7 @@
       "split-diffDecorationsZIndex": 0
   welcome:
     showOnStartup: false
+".jade.source":
+  editor:
+    scrollPastEnd: true
+    showIndentGuide: true

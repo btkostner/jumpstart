@@ -35,7 +35,7 @@ hc set window_border_width 1
 hc set snap_distance 0
 hc set snap_gap 0
 hc set frame_padding 0
-hc set frame_gap 40
+hc set frame_gap 20
 hc set window_gap 0
 
 hc set frame_transparent_width 0
@@ -56,13 +56,13 @@ hc set mouse_recenter_gap 0
 Mod=Mod4 # super key
 
 # non herbstluft keybindings
-hc keybind XF86AudioRaiseVolume spawn "pactl set-sink-volume 2 +5%"
-hc keybind XF86AudioLowerVolume spawn "pactl set-sink-volume 2 -5%"
-hc keybind XF86AudioMute spawn "pactl set-sink-mute 2 toggle"
+hc keybind XF86AudioRaiseVolume spawn "S=`pacmd list-sinks | grep '* index: [0-9]' | cut -d' ' -f5`; pactl set-sink-volume $S +5%"
+hc keybind XF86AudioLowerVolume spawn "S=`pacmd list-sinks | grep '* index: [0-9]' | cut -d' ' -f5`; pactl set-sink-volume $S -5%"
+hc keybind XF86AudioMute spawn "S=`pacmd list-sinks | grep '* index: [0-9]' | cut -d' ' -f5`; pactl set-sink-mute $S toggle"
 
 # app launching keybindings
 hc keybind $Mod-Escape spawn "lock"
-hc keybind $Mod-Return spawn dmenu_run -sb '#8abeb7' -sf '#1d1f21' -w 1840 -h 40 -y 40 -x 40
+hc keybind $Mod-Return spawn dmenu_run -sb '#8abeb7' -sf '#1d1f21' -w 1880 -h 40 -y 20 -x 20
 hc keybind $Mod-space spawn "termite"
 hc keybind $Mod-Shift-q spawn "xdotool getwindowfocus windowkill"
 
@@ -157,16 +157,5 @@ herbstclient chain $clientsend&
 ## panel startup
 ####################
 
-panel=~/.config/herbstluftwm/panel.sh
-for monitor in $(herbstclient list_monitors | cut -d: -f1); do
-  "$panel" $monitor &
-done
+$HOME/.config/herbstluftwm/panel.sh
 
-####################
-## wallpaper setup
-####################
-
-wallpaper=~/.config/herbstluftwm/wallpaper.sh
-for monitor in $(herbstclient list_monitors | cut -d: -f1); do
-  "$wallpaper" $monitor &
-done

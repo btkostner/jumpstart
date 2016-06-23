@@ -4,6 +4,11 @@ Host GitHub
   User git
   IdentityFile ~/.ssh/github
 
+Host LP
+  HostName launchpad.net
+  User btkostner
+  IdentityFile ~/.ssh/launchpad
+
 # Personal Servers
 Host Virgon
   HostName 159.203.233.189
@@ -25,3 +30,9 @@ Host builds
   HostName builds.elementaryos.org
   User btkostner
   IdentityFile ~/.ssh/elementary
+
+# virtual machines
+Host ansible
+  HostName 192.168.1.115
+  User btkostner
+  IdentityFile ~/.ssh/ansible
