@@ -36,6 +36,8 @@ sudo rsync -arAXs --info=progress2 --delete \
   --exclude 'node_modules' \
   --exclude '.npm' \
   --exclude 'VirtualBox VMs' \
+  --exclude '.cache' \
+  --exclude '.vagrant' \
   $HOME/ /mnt/$host
 
 sudo umount /mnt
