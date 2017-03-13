@@ -76,6 +76,8 @@ header git
 
 install git
 
+git config --global fetch.prune true
+
 header rsync
 
 install rsync
