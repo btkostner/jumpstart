@@ -1,0 +1,75 @@
+env:
+  TERM: xterm-256color
+
+dynamic_title: true
+
+window:
+  decorations: none
+  padding:
+    x: 16
+    y: 16
+
+scrolling:
+  history: 100000
+
+font:
+  normal:
+    family: Fira Code
+
+  bold:
+    family: Fira Code
+    style: Bold
+
+  italic:
+    family: Fira Code
+    style: Italic
+
+  size: 10
+
+colors:
+  primary:
+    background: '0x1d1f21'
+    foreground: '0xc5c8c6'
+
+  cursor:
+    text: '0x1d1f21'
+    cursor: '0xc5c8c6'
+
+  normal:
+    black:   '0x1d1f21'
+    red:     '0xcc6666'
+    green:   '0xb5bd68'
+    yellow:  '0xf0c674'
+    blue:    '0x81a2be'
+    magenta: '0xb294bb'
+    cyan:    '0x8abeb7'
+    white:   '0xc5c8c6'
+
+  bright:
+    black:   '0x969896'
+    red:     '0xcc6666'
+    green:   '0xb5bd68'
+    yellow:  '0xf0c674'
+    blue:    '0x81a2be'
+    magenta: '0xb294bb'
+    cyan:    '0x8abeb7'
+    white:   '0xffffff'
+
+  indexed_colors:
+    - { index: 16, color: '0xde935f' }
+    - { index: 17, color: '0xa3685a' }
+    - { index: 18, color: '0x282a2e' }
+    - { index: 19, color: '0x373b41' }
+    - { index: 20, color: '0xb4b7b4' }
+    - { index: 21, color: '0xe0e0e0' }
+
+key_bindings:
+  - { key: V,       mods: Command|Shift, action: Paste }
+  - { key: C,       mods: Command|Shift, action: Copy  }
+
+selection:
+  semantic_escape_chars: ",│`|:\"' ()[]{}<>"
+  save_to_clipboard: false
+
+cursor:
+  style: Block

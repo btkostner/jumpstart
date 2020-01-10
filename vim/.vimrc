@@ -14,6 +14,12 @@ Plugin 'scrooloose/syntastic'
 Plugin 'bling/vim-airline'
 Plugin 'sjl/gundo.vim'
 Plugin 'airblade/vim-gitgutter'
+Plugin 'scrooloose/nerdtree'
+Plugin 'xolox/vim-misc'
+Plugin 'xolox/vim-session'
+
+Plugin 'posva/vim-vue'
+Plugin 'elixir-editors/vim-elixir'
 
 call vundle#end()
 filetype plugin indent on
@@ -46,7 +52,6 @@ set expandtab
 filetype plugin on
 filetype indent on
 
-
 set nowrap
 set linebreak
 
@@ -72,3 +77,9 @@ cnoreabbrev Undo GundoToggle
 let g:gitgutter_enabled=1
 let g:gitgutter_signs=0
 let g:gitgutter_highlight_lines=1
+
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+autocmd BufWritePre * :%s/\s\+$//e
+
+map <C-t> :NERDTreeToggle<CR>

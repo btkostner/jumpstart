@@ -9,21 +9,24 @@ if [[ ! -d $DIR ]]; then
   mkdir $DIR
 fi
 
-scrot $DIR/$IMG
-convert $DIR/$IMG -scale '5%' -scale '2000%' $DIR/$IMG
+FILE=$DIR/$IMG
 
-i3lock \
-  --textcolor=00000000 \
-  --keyhlcolor=ffffffcc \
-  --bshlcolor=000000cc \
-  --linecolor=00000000 \
-  --insidecolor=00000000 \
-  --insidevercolor=00000000 \
-  --insidewrongcolor=00000000 \
-  --ringcolor=ffffff80 \
-  --ringvercolor=81a2be80 \
-  --ringwrongcolor=cc666680 \
-  -i $DIR/$IMG > /dev/null 2>&1
+grim $FILE
+convert $FILE -scale '5%' -scale '2000%' $FILE
 
-rm $DIR/$IMG
+swaylock \
+  --text-color=00000000 \
+  --key-hl-color=ffffffcc \
+  --bs-hl-color=000000cc \
+  --line-color=00000000 \
+  --inside-color=00000000 \
+  --inside-ver-color=00000000 \
+  --inside-wrong-color=00000000 \
+  --ring-color=ffffff80 \
+  --ring-ver-color=81a2be80 \
+  --ring-wrong-color=cc666680 \
+  --ignore-empty-password \
+  -i $FILE \
+  -s center
 
+rm $FILE

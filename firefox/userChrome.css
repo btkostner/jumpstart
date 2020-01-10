@@ -1,0 +1,53 @@
+@namespace url("http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul");
+
+.tabbrowser-tab {
+    min-height: 32px !important;
+}
+
+.tab-icon-image {
+    display: none !important;
+}
+
+#urlbar-container {
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+#nav-bar {
+    min-height: 32px !important;
+}
+
+#urlbar {
+    border-radius: 0 !important;
+    margin: 0 !important;
+    min-height: 32px !important;
+}
+
+#tracking-protection-icon-container {
+    display: none !important;
+}
+
+#identity-box {
+    min-height: 32px !important;
+    padding: 0 12px !important;
+}
+
+#identity-box > *:not(#identity-icon) {
+    display: none !important;
+}
+
+#page-action-buttons {
+    display: none !important;
+}
+
+#nav-bar-customization-target > * {
+    min-width: 32px;
+}
+
+#PanelUI-button {
+    display: none !important;
+}
+
+#forward-button {
+    display: none !important;
+}

@@ -1,0 +1,79 @@
+{
+    "layer": "top",
+    "position": "top",
+    "height": 36,
+    "margin-top": 16,
+    "margin-left": 16,
+    "margin-right": 16,
+    "margin-bottom": 0,
+    "modules-left": ["sway/workspaces", "sway/window"],
+    "modules-center": ["clock"],
+    "modules-right": ["pulseaudio", "mpd", "cpu", "memory", "network", "battery"],
+    "sway/workspaces": {
+        "format": "{icon}",
+        "disable-scroll": true,
+        "all-outputs": true,
+        "persistent_workspaces": {
+            "1": [],
+            "2": [],
+            "3": [],
+            "4": [],
+            "5": [],
+            "6": [],
+            "7": [],
+            "8": []
+        },
+        "format-icons": {
+          "1": "一",
+          "2": "二",
+          "3": "三",
+          "4": "四",
+          "5": "五",
+          "6": "六",
+          "7": "七",
+          "8": "八"
+        }
+    },
+    "cpu": {
+        "format": "{usage}% /",
+        "tooltip": false
+    },
+    "memory": {
+        "format": "{percentage}%",
+        "tooltip": false
+    },
+    "clock": {
+        "format": "{:%A %B %d %I:%M %p}",
+        "tooltip": false
+    },
+    "battery": {
+        "format": "{capacity}% {time}",
+        "format-charging": "{capacity}%",
+        "format-full": "{capacity}%",
+        "interval": 30,
+        "states": {
+            "warning": 25,
+            "critical": 10
+        },
+        "tooltip": false
+    },
+    "network": {
+        "format": "{ifname} {ipaddr}",
+        "format-wifi": "{ifname} {ipaddr} {signalStrength}",
+        "format-disconnected": "Disconnected",
+        "tooltip": false
+    },
+    "pulseaudio": {
+        "format": "{volume}%",
+        "format-bluetooth": "{volume}% {desc}",
+        "format-muted": "Muted",
+        "tooltip": false
+    },
+    "mpd": {
+      "format": "<span color=\"#b5bd68\">{artist}</span> {title}",
+      "format-stopped": "Silence",
+      "format-disconnected": "Silence",
+      "tooltip": false
+    }
+}
+

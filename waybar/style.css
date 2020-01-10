@@ -1,0 +1,125 @@
+* {
+    border:        none;
+    font-family:   "Fira Code";
+    font-size:     10pt;
+    box-shadow:    none;
+    text-shadow:   none;
+}
+
+window {
+    background: transparent;
+    color: #c5c8c6;
+}
+
+window > box > box {
+    background: transparent;
+    border-radius: 3px;
+    padding: 0;
+}
+
+#cpu {
+    background-color: #1d1f21;
+    border-radius: 3px 0 0 3px;
+    margin: 0 0 0 12px;
+    padding: 0 4px 0 12px;
+}
+
+#memory {
+    background-color: #1d1f21;
+    border-radius: 0 3px 3px 0;
+    margin: 0 12px 0 0;
+    padding: 0 12px 0 4px;
+}
+
+#clock {
+    background-color: #1d1f21;
+    border-radius: 3px;
+    min-width: 140px;
+    padding: 0 12px;
+}
+
+#pulseaudio {
+    background-color: #1d1f21;
+    border-radius: 3px 0 0 3px;
+    margin: 0 0 0 24px;
+    padding: 0 6px 0 12px;
+}
+
+#mpd {
+    background-color: #1d1f21;
+    border-radius: 0 3px 3px 0;
+    margin: 0 12px 0 0;
+    padding: 0 12px 0 6px;
+}
+
+#network {
+    background-color: #1d1f21;
+    border-radius: 3px;
+    margin: 0 12px;
+    padding: 0 12px;
+}
+
+#battery {
+    background-color: #1d1f21;
+    border-radius: 3px;
+    margin: 0 0 0 12px;
+    padding: 0 12px;
+}
+
+#battery.warning {
+    background-color: #f0c674;
+    color: #1d1f21;
+}
+
+#battery.critical {
+    background-color: #cc6666;
+    color: #1d1f21;
+}
+
+#battery.charging,
+#battery.full {
+    background-color: #b5bd68;
+    color: #1d1f21;
+}
+
+#workspaces button {
+    background-color: #1d1f21;
+    border-radius: 0;
+    color: #c5c8c6;
+}
+
+#workspaces button:first-child {
+    border-radius: 3px 0 0 3px;
+}
+
+#workspaces button:last-child {
+    border-radius: 0 3px 3px 0;
+    margin: 0 12px 0 0;
+}
+
+#workspaces button.visible {
+    background-color: #81a2be;
+    color: #1d1f21;
+}
+
+#workspaces button.focused {
+    background-color: #b5bd68;
+    color: #1d1f21;
+}
+
+#workspaces button.urgent {
+    background-color: #cc6666;
+    color: #1d1f21;
+}
+
+#window {
+    background-color: #1d1f21;
+    border-radius: 3px;
+    color: #c5c8c6;
+    padding: 0 12px;
+    margin: 0 24px 0 12px;
+}
+
+window#waybar.empty #window {
+    background-color: transparent;
+}
